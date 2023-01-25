@@ -91,5 +91,8 @@
 	<beans:bean class = "kr.spring.ch11.controller.PageRanksController"/>
 	<beans:bean id = "pageRanks" class = "kr.spring.ch11.view.PageRanksView"/>
 	
+	<!--  JSON 문자열 생성  -->
+	<beans:bean class = "kr.spring.ch12.controller.PageReportController"/>
+	
 	
 </beans:beans>

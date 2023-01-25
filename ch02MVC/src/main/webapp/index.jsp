@@ -20,6 +20,7 @@
 <a href = "${pageContext.request.contextPath}/member/write.do">MemberWriteConntroller</a><br>
 <a href = "${pageContext.request.contextPath}/file.do">DownloadController</a><br>
 <a href = "${pageContext.request.contextPath}/pageRanksExcel.do">/pageRanksExcel.do(Excel)</a><br>
+<a href = "${pageContext.request.contextPath}/pageJsonReport.do">/pageJsonReport.do(Json)</a><br>
 
   
 </body>
