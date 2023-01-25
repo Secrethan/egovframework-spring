@@ -87,6 +87,9 @@
 	<beans:bean class = "kr.spring.ch10.controller.DownloadController"/>
 	<beans:bean id = "download" class = "kr.spring.ch10.view.DownloadView"/>
 	
+	<!--  Excel 파일  다운로드  --> 
+	<beans:bean class = "kr.spring.ch11.controller.PageRanksController"/>
+	<beans:bean id = "pageRanks" class = "kr.spring.ch11.view.PageRanksView"/>
 	
 	
 </beans:beans>
