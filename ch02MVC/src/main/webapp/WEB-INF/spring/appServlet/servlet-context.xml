@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
@@ -16,11 +17,20 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!--  JSP 파일을 호출하는 ViewResolver -->
 	<!-- ViewResolver는 경로와 확장자 타입을 가지고 있다가 DispatcherServlet에 제공  -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<!-- ViewResolver 우선순위 부여 p -->
+		<beans:property name="order" value = "1"/>
 	</beans:bean>
+	
+	<!-- 클래스를 호출하는 ViewResolver -->
+	<!-- ViewResolver 우선순위 부여 p / 뷰이름을 통해 호출  -->
+	<beans:bean id = "viewResolver" class = "org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
+	
+	
 	
 	<!--  MVC 기본 설정  -->
 	<beans:bean id = "helloController" class = "kr.spring.ch01.controller.HelloController"/>
@@ -70,7 +80,13 @@
 	<!-- 파일 업로드 처리 -->
 	<beans:bean class = "kr.spring.ch08.controller.SubmitReportController"/>
 	
-	<!--  -->
+	<!-- 어노테이션을 이용한 유효성 체크   -->
 	<beans:bean class = "kr.spring.ch09.controller.MemberWriteController"/>
+	
+	<!-- 파일 다운로드 -->
+	<beans:bean class = "kr.spring.ch10.controller.DownloadController"/>
+	<beans:bean id = "download" class = "kr.spring.ch10.view.DownloadView"/>
+	
+	
 	
 </beans:beans>

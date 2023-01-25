@@ -1,11 +1,27 @@
 package kr.spring.ch09.vo;
 
-public class MemberVO {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
+
+public class MemberVO {
+	//정규 표현식으로 패턴 검사 ^[]+$ -> ^(시작) , $(끝)            * ^가 []내부에 있을때는 부정(not)의 의미
+	@Pattern(regexp="^[0-9a-zA-Z]+$")
+	//@NotEmpty 
 	private String id;
+	//문자열의 길이 지정
+	@Size(min=4,max=10)
 	private String password;
+	@NotEmpty
 	private String name;
+	//숫자 데이터의 길이 지정 
+	@Range(min=1,max=200)
 	private int age;
+	@Email
+	@NotEmpty
 	private String email;
 	
 	public String getId() {
