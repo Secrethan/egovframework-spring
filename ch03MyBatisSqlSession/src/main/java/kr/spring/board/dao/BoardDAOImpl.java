@@ -36,13 +36,13 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public BoardVO getBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		                                   //${num}
+		return sqlSession.selectOne("getBoard",num);
 	}
 
 	@Override
 	public void updateBoard(BoardVO board) {
-		// TODO Auto-generated method stub
+		sqlSession.update("updateBoard", board);
 		
 	}
 

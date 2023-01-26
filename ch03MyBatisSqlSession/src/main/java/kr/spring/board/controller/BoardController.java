@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -80,8 +81,46 @@ public class BoardController {
 		//글 쓰기
 		boardService.insertBoard(vo);
 		
-		
  		
+		return "redirect:/list.do";
+	}
+	//글 상세보기
+	@RequestMapping("/detail.do")
+	public ModelAndView detail(@RequestParam int num) {
+		BoardVO board = boardService.getBoard(num);
+		return new ModelAndView("selectDetail", "board", board);
+	}
+	
+	//수정 폼 호출 
+	@GetMapping("/update.do")
+	public String formUpdate(@RequestParam int num, Model model) {
+		
+		model.addAttribute("boardVO",boardService.getBoard(num));
+		
+		return "updateForm";
+	}
+	
+	//글 수정 처리 
+	@PostMapping("/update.do")
+	public String submitUpdate(@Valid BoardVO vo, BindingResult result) {
+		//유효성 체크 결과 오류가 있으면 다시 폼 호출
+		if(result.hasErrors()) {
+			return "updateForm";
+		}
+		//비밀번호 일치 여부 확인 
+		//DB에 저장된 비밀번호 
+		BoardVO db_board = boardService.getBoard(vo.getNum());
+		if(!db_board.getPasswd().equals(vo.getPasswd())) {
+			//비밀번호 불일치 
+			result.rejectValue("passwd", "invalidPassword");
+			
+			return "updateForm";
+		}
+		
+		//글 수정
+		boardService.updateBoard(vo);
+		
+		
 		return "redirect:/list.do";
 	}
 }

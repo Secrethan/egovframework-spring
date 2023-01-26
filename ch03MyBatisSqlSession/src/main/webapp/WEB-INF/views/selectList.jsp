@@ -28,7 +28,7 @@
 		<c:forEach var = "board" items = "${list}">
 			<tr>
 				<td>${board.num}</td>
-				<td><a href ="detail.do?num="${board.title}></a></td>
+				<td><a href ="detail.do?num=${board.num}">${board.title}</a></td>
 				<td>${board.writer}</td>
 				<td>${board.reg_date}</td>
 			</tr>
