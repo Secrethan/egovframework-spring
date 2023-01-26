@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.board.dao.BoardDAO">
+	<!-- 글 쓰기 -->
+	<insert id="insertBoard" parameterType="boardVO">
+		INSERT INTO aboard(
+		num,
+		writer,
+		title,
+		passwd,
+		content,
+		reg_date)
+		VALUES(
+		aboard_seq.nextval,
+		#{writer},
+		#{title},
+		#{passwd},
+		#{content},
+		SYSDATE
+		)
+
+	</insert>
+
+	<!-- 총 레코드 수 -->
+	<select id="getBoardCount" resultType="integer">
+		SELECT
+		COUNT(*)
+		FROM aboard
+	</select>
+
+	<!-- 목록 -->
+	<select id="getBoardList" parameterType="map"
+		resultType="boardVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM aboard ORDER BY num DESC)a)
+		<![CDATA[		
+		WHERE rnum >= #{start} AND rnum <= #{end} ]]>
+	</select>
+
+</mapper>
+
+
+
+
+
+
+

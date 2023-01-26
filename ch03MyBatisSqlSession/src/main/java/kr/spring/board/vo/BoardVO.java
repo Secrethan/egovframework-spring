@@ -2,18 +2,24 @@ package kr.spring.board.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotEmpty;
+
 public class BoardVO {
 	private int num;
-	private String write;
+	@NotEmpty
+	private String writer;
+	@NotEmpty
 	private String title;
+	@NotEmpty
 	private String passwd;
+	@NotEmpty
 	private String content;
 	private Date reg_date;
 	
 	
 	@Override
 	public String toString() {
-		return "BoardVO [num=" + num + ", write=" + write + ", title=" + title + ", passwd=" + passwd + ", content="
+		return "BoardVO [num=" + num + ", writer=" + writer + ", title=" + title + ", passwd=" + passwd + ", content="
 				+ content + ", reg_date=" + reg_date + "]";
 	}
 	public int getNum() {
@@ -22,11 +28,11 @@ public class BoardVO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getWrite() {
-		return write;
+	public String getWriter() {
+		return writer;
 	}
-	public void setWrite(String write) {
-		this.write = write;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public String getTitle() {
 		return title;
