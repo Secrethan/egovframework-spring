@@ -50,8 +50,14 @@
 			writer=#{writer},
 			title=#{title},
 			content=#{content}
-		WHERE num=#{num}
+		WHERE num= #{num}
 	</update>
+	
+	<!-- 글 삭제  -->
+	<delete id="deleteBoard" parameterType="integer">
+		DELETE FROM aboard
+		WHERE num = #{num}
+	</delete>
 </mapper>
 
 
