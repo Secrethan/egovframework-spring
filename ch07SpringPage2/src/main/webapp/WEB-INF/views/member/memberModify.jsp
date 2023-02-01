@@ -5,19 +5,12 @@
 <script type="text/javascript" src ="${pageContext.request.contextPath}/js/confirmId.js"></script>
 
 <div class="page-main">
-	<h2>회원가입</h2>
-	<form:form action="registerUser.do" id="register_form"
+	<h2>회원정보수정</h2>
+	<form:form action="update.do" id="modify_form"
 	                            modelAttribute="memberVO">
 		<form:errors element="div" cssClass="error-color"/>                            
 		<ul>
-			<li>
-				<label for="id">아이디</label>
-				<form:input path="id" placeholder="영문,숫자만 4~12자"
-				    autocomplete="off"/>
-				<input type="button" id="confirmId" value="ID중복체크">
-				<span id="message_id"></span>
-				<form:errors path="id" cssClass="error-color"/>    
-			</li>
+			
 			<li>
 				<label for="name">이름</label>
 				<form:input path="name"/>
@@ -27,11 +20,7 @@
 				<label for="nick_name">닉네임</label>
 				<form:input path="nick_name"/>
 			</li>
-			<li>
-				<label for="passwd">비밀번호</label>
-				<form:password path="passwd" placeholder="영문,숫자만 4~12자"/>
-				<form:errors path="passwd" cssClass="error-color"/>
-			</li>
+			
 			<li>
 				<label>취미</label>
 				<form:checkbox path="f_hobby" value="여행"/>여행
@@ -69,9 +58,9 @@
 			</li>
 		</ul>
 		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="홈으로"
-			   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<form:button>수정</form:button>
+			<input type="button" value="MyPage"
+			   onclick="location.href='${pageContext.request.contextPath}/main/myPage.do'">
 		</div>
 	</form:form>
 </div>

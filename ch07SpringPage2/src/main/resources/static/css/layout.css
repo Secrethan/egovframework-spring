@@ -97,7 +97,7 @@ div#main_menu ul li{
 /* 공통 등록, 수정 폼
 ---------------------------*/
 form{
-	width:600px;
+	width:800px;
 	margin:0 auto;
 	border:1px solid #000;
 	padding:10px 10px 10px 30px;
@@ -144,15 +144,62 @@ li.paging-current{
 	list-style:none;
 	padding:10px;
 }
+/*회원정보 수정*/
+#modify_form{
+	width:600px;
+}
 
 /* 로그인
 ---------------------------*/
+#login_form{
+	width:600px;
+}
+#login_form #id,#login_form #passwd{
+	width:200px;
+}
 
 /* Admin, MY페이지 공통
 ---------------------------*/
+.side-bar{
+	margin:10px 10px 10px 0;
+	padding:10px;
+	/*사이드바의 높이가 컨텐트의 높이와 동일하게 자동 조절*/
+	margin-bottom:-9999px;
+	padding-bottom:9999px;
+	
+	background-color:#CCCCCC;
+}
+.side-bar ul{
+	margin:0;
+	padding:0;
+}
+.side-bar ul li{
+	padding:5px 10px 5px 10px;
+}
+.side-bar ul li img{
+	margin-left:3px;
+}
+.side-height{
+	/*사이드바의 높이가 컨텐트의 높이와 동일하게 자동 조절하기 위해 흘러넘친 배경색을 숨김*/
+	overflow:hidden;
+	margin-bottom:10px;
+}
+.menu-btn{
+	width:100%;
+	height:50px;
+	font-size:12pt;
+	background-color:#FCFCFC;
+	border-color:#B7B5B5;
+	border-radius:5px;
+}
 
 /* MY페이지
 ---------------------------*/
+.my-photo{
+	object-fit:cover;
+	object-position:top;
+	border-radius:50%;
+}
 
 /* 공통 목록
 ---------------------------*/

@@ -1,11 +1,14 @@
 package kr.spring.member.vo;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class MemberVO {
 	private int mem_num;
@@ -35,6 +38,23 @@ public class MemberVO {
 	private String photo_name;
 	private Date reg_date;
 	private Date modify_date;
+	
+	//====비밀번호 일치 여부 체크 =====//
+	public boolean isCheckedPassword(String userPasswd) {
+		if(auth > 1 && passwd.equals(userPasswd)) {
+			return true;
+		}
+		return false;
+	}
+	//===== 이미지 BLOB 처리 ======//
+	//(주의) 폼에서 파일업로드 파라미터네임은 반드시 upload로 지정해야한다.
+	public void setUpload(MultipartFile upload) throws IOException {
+		//MultipartFile -> byte[]
+		setPhoto(upload.getBytes());
+		//파일이름
+		setPhoto_name(upload.getOriginalFilename());
+	}
+	
 	
 	//====checkbox 데이터 처리====//
 	//form:checkbox에서 사용할 수 있도록 String -> String[]로 변환

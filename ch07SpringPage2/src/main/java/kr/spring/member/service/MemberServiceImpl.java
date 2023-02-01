@@ -28,13 +28,13 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberVO selectMember(Integer mem_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return memberMapper.selectMember(mem_num);
 	}
 
 	@Override
 	public void updateMember(MemberVO member) {
-		// TODO Auto-generated method stub
+		memberMapper.updateMember(member);
+		memberMapper.updateMember_detail(member);
 		
 	}
 
@@ -47,6 +47,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void deleteMember(Integer mem_num) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateProfile(MemberVO member) {
+		memberMapper.updateProfile(member);
 		
 	}
 
