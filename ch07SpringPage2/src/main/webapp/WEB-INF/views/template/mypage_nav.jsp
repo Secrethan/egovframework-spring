@@ -7,12 +7,13 @@
 	<ul>
 		<li>
 			<c:if test="${empty member.photo_name}">
-				<img src = "${pageContext.request.contextPath}/image/face.png" width="200" height="200" class = "my-photo">
+			<img src="${pageContext.request.contextPath}/images/face.png" width="200" 
+			           height="200" class="my-photo">
 			</c:if>
-			
 			<c:if test="${!empty member.photo_name}">
-				<img src = "${pageContext.request.contextPath}/member/photoView.do" width="200" height="200" class = "my-photo">
-			</c:if>		
+			<img src="${pageContext.request.contextPath}/member/photoView.do" width="200" 
+			           height="200" class="my-photo">
+			</c:if>
 		</li>
 		<li>
 			<div class = "align-center">

@@ -42,7 +42,7 @@ $(function(){
 			return;
 		}
 		//파일 전송
-		let form_date =new FormData();
+		let form_data =new FormData();
 		form_data.append('upload',my_photo);
 		$.ajax({
 			url:'updateMyPhoto.do',

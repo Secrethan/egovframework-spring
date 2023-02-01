@@ -229,10 +229,10 @@ public class MemberController {
 		logger.debug("<<photoView>>"+user);
 		
 		if(user==null) {
-			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("image_bundle/face.png"));
+			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
 								//속성명, 속성값
 			model.addAttribute("imageFile",readbyte);
-			model.addAttribute("filename","face_png");
+			model.addAttribute("filename","face.png");
 		}
 		else {
 			MemberVO memberVO = memberService.selectMember(user.getMem_num());
@@ -245,9 +245,9 @@ public class MemberController {
 	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
 		if(memberVO.getPhoto_name()==null) {
 			//기본 이미지	
-			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("image_bundle/face.png"));
+			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
 			model.addAttribute("imageFile",readbyte);
-			model.addAttribute("filename","face_png");
+			model.addAttribute("filename","face.png");
 		}
 		else {
 			model.addAttribute("imageFile", memberVO.getPhoto());

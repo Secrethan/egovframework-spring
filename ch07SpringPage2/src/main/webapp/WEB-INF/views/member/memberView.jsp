@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!-- 중앙 컨텐츠 시작 -->
-<script type = "text/javascript" src = "${pageContext.request.contextPath}/js/member.js"></script>
+
 <div class = "page-main">
 	<h2>회원 상세 정보 <input type = "button" value = "회원정보 수정" onclick = "location.href='update.do'"></h2>
 	
