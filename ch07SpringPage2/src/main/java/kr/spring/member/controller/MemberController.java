@@ -221,6 +221,83 @@ public class MemberController {
 			memberService.updateMember(memberVO);
 			return "redirect:/member/myPage.do";
 	}
+	//====비밀번호 변경========/
+	//비밀번호 변경 폼 호출
+	@GetMapping("/member/changePassword.do")
+	public String formChangePassword() {
+		return "memberChangePassword";
+	}
+	//비밀번호 변경 폼에서 전송된 데이터 처리
+	@PostMapping("/member/changePassword.do")
+	public String submitChangePassword(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model, HttpServletRequest requst) {
+		
+		logger.debug("<<비밀번호 변경 처리>>:" + memberVO);
+		//유효성 체크 결과 오류 발생 시 폼 호출
+		if(result.hasFieldErrors("now_passwd") || result.hasFieldErrors("passwd")) {
+			return formChangePassword();
+		}
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		memberVO.setMem_num(user.getMem_num());
+		
+		MemberVO db_member = memberService.selectMember(memberVO.getMem_num());
+		//폼에서 전송한 현재 비밀번호와 DB에서 받아온 비밀번호 일치 여부 체크
+		if(!db_member.getPasswd().equals(memberVO.getNow_passwd())) {
+			result.rejectValue("now_passwd", "invalidPassword");
+			
+			return formChangePassword();
+		}
+		//비밀번호 변경 작업
+		memberService.updatePassword(memberVO);
+		//view에 표시할 메시지 지정
+		model.addAttribute("message","비밀번호 변경 완료");
+		model.addAttribute("url",requst.getContextPath()+"/member/myPage.do");
+		
+		return "common/resultView";
+	}
+	//=====회원 정보 삭제 (회원 탈퇴)====//
+	@PostMapping("/member/delete.do")
+	public String submitDelete(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
+		logger.debug("<<회원탈퇴>>:"+memberVO);
+		
+		//유효성 체크 결과 오류 발생 시 폼 호출
+		if(result.hasFieldErrors("id") || result.hasFieldErrors("passwd")) {
+			return formDelete();
+		}
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO db_member = memberService.selectMember(user.getMem_num());
+		
+		boolean check = false;
+		//비밀번호 일치 여부 체크
+		try {
+			if(db_member != null && db_member.getId().equals(memberVO.getId())) {
+				// 비밀번호 일치 여부 체크 
+				check = db_member.isCheckedPassword(memberVO.getPasswd());
+			}
+			if(check) {
+				//인증 성공, 회원 정보 삭제
+				memberService.deleteMember(user.getMem_num());
+				//로그아웃
+				session.invalidate();
+				
+				model.addAttribute("accessMsg", "회원탈퇴를 완료했습니다.");
+				
+				return "common/notice";
+			}
+			//인증 실패(catch로 이동)	
+			throw new AuthCheckException();
+		} catch (AuthCheckException e) {
+			result.reject("invalidIdOrPassword");
+			return formDelete();
+		}
+	 
+	}
+	
+	//=====회원 삭제 폼 호출
+	@GetMapping("/member/delete.do")
+	public String formDelete() {
+
+		return "memberDelete";
+	}
 	//====프로필 사진 출력(로그인 출력)======//
 	@RequestMapping("/member/photoView.do")
 	public String getProfile(HttpSession session, HttpServletRequest request, Model model) {

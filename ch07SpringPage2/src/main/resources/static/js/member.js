@@ -6,7 +6,7 @@ $(function(){
 		$(this).hide();
 	}); //end of click;
 	//처음 화면에 보여지는 이미지 읽기 
-	let photo_path = $('.my-photo').attr('src');
+	let photo_path = $('.my-photo').attr('src'); 
 	let my_photo; //업로드하고자 선택한 이미지 저장
 	
 	//취소 작업
@@ -73,4 +73,56 @@ $(function(){
 			}
 		})	;	
 	}); //end of click - ajax
+	
+	//취소 버튼 처리 
+	$('#photo_reset').click(function(){
+		$('.my-photo').attr('src',photo_path);
+		$('#upload').val('');
+		$('#photo_choice').hide();
+		$('#photo_btn').show();
+	});
+	
+	//비밀번호 변경 체크 
+	$('#passwd').keyup(function(){
+		//비밀번호가 비어 있지 않고 새롭게 입력하는 비밀번호랑 같지 않을때
+		if($('#confirm_passwd').val()!='' && $('#confirm_passwd').val() !=$(this).val()) {
+			$('#message_id').text('비밀번호 불일치').css('color','red');
+			//새롭게 입력 받은 비밀번호와 일치할 때
+		} else if($('#confirm_passwd').val() !='' && $('#confirm_passwd').val() == $(this).val()) {
+			$('#message_id').text('비밀번호 일치').css('color','#000');
+		}
+	});
+	
+	$('#confirm_passwd').keyup(function(){
+		//비밀번호가 비어 있지 않고 새롭게 입력하는 비밀번호랑 같지 않을때
+		if($('#passwd').val()!='' && $('#passwd').val() !=$(this).val()) {
+			$('#message_id').text('비밀번호 불일치').css('color','red');
+			//새롭게 입력 받은 비밀번호와 일치할 때
+		} else if($('#passwd').val() !='' && $('#passwd').val() == $(this).val()) {
+			$('#message_id').text('비밀번호 일치').css('color','#000');
+		}
+	});
+	
+	$('#change_form').submit(function(){
+		if($('#now_passwd').val().trim()=='') {
+			alert('현재 비밀번호를 입력하세요');
+			$('#now_passwd').val('').focus();
+			return false;
+		}
+		if($('#passwd').val().trim()=='') {
+			alert('새로운 비밀번호를 입력하세요');
+			$('#passwd').val('').focus();
+			return false;
+		}
+		if($('#confirm_passwd').val().trim()=='') {
+			alert('비밀번호 확인을 입력하세요');
+			$('#confirm_passwd').val('').focus();
+			return false;
+		}
+		if($('#passwd').val()!=$('#confirm_passwd').val()){
+			$('#message_id').text('비밀번호 불일치').css('color','red');
+			return false;
+		}
+	});
+	
 });
